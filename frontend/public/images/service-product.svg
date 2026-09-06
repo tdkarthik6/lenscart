@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#2a2010"/>
+      <stop offset="100%" style="stop-color:#0A0906"/>
+    </radialGradient>
+    <radialGradient id="light" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:rgba(201,168,76,0.3)"/>
+      <stop offset="100%" style="stop-color:rgba(201,168,76,0)"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Studio light effect -->
+  <ellipse cx="400" cy="200" rx="300" ry="200" fill="url(#light)"/>
+  <!-- Surface/table -->
+  <rect x="0" y="380" width="800" height="220" fill="#111009" opacity="0.7"/>
+  <line x1="0" y1="380" x2="800" y2="380" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+  <!-- Product box 1 -->
+  <rect x="240" y="260" width="120" height="140" rx="4" fill="#1a1810" stroke="#C9A84C" stroke-width="1.5"/>
+  <rect x="240" y="260" width="120" height="30" rx="4" fill="#C9A84C" opacity="0.8"/>
+  <text x="300" y="282" text-anchor="middle" fill="#0A0906" font-family="Georgia" font-size="13" font-weight="bold">LUXE</text>
+  <!-- Product box 2 -->
+  <rect x="390" y="240" width="100" height="160" rx="4" fill="#1e1c12" stroke="#C9A84C" stroke-width="1.5"/>
+  <rect x="390" y="240" width="100" height="25" rx="4" fill="#E8722A" opacity="0.8"/>
+  <text x="440" y="258" text-anchor="middle" fill="white" font-family="Georgia" font-size="11" font-weight="bold">GOLD</text>
+  <!-- Small product -->
+  <rect x="510" y="300" width="80" height="100" rx="4" fill="#16140d" stroke="#C9A84C" stroke-width="1.5"/>
+  <!-- Reflections -->
+  <rect x="240" y="400" width="120" height="60" fill="#C9A84C" opacity="0.04"/>
+  <rect x="390" y="400" width="100" height="60" fill="#E8722A" opacity="0.04"/>
+  <!-- Camera icon -->
+  <circle cx="680" cy="80" r="30" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/>
+  <rect x="658" y="68" width="44" height="30" rx="4" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="680" cy="83" r="9" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/>
+  <!-- Label -->
+  <text x="400" y="530" text-anchor="middle" fill="#C9A84C" font-family="Georgia" font-size="22" font-weight="bold" opacity="0.9">Product Photography</text>
+  <text x="400" y="558" text-anchor="middle" fill="#B8A98C" font-family="Arial" font-size="13" opacity="0.7">Studio · Commercial · E-commerce</text>
+</svg>

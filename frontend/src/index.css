@@ -683,11 +683,12 @@ textarea.form-input {
 @media (max-width: 1024px) {
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-services { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
   :root { --nav-height: 64px; }
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .grid-2, .grid-3, .grid-4, .grid-services { grid-template-columns: 1fr; }
   .section { padding: var(--space-2xl) 0; }
   .hide-mobile { display: none !important; }
 }
@@ -696,3 +697,319 @@ textarea.form-input {
   .btn-lg { padding: 14px 32px; font-size: 1rem; }
   h1 { font-size: 2.2rem; }
 }
+
+/* ============================================================
+   PREMIUM ADDITIONS — LUXURY UI SYSTEM
+   ============================================================ */
+
+/* ── New keyframes ── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0.2); }
+  50%       { box-shadow: 0 0 40px rgba(201,168,76,0.5), 0 0 80px rgba(201,168,76,0.15); }
+}
+
+@keyframes shimmerText {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(201,168,76,0.3); }
+  50%       { border-color: rgba(201,168,76,0.7); }
+}
+
+/* ── Animation utilities ── */
+.animate-slide-up   { animation: slideUp 0.7s ease forwards; }
+.animate-slide-up-1 { animation: slideUp 0.7s ease 0.1s both; }
+.animate-slide-up-2 { animation: slideUp 0.7s ease 0.2s both; }
+.animate-slide-up-3 { animation: slideUp 0.7s ease 0.35s both; }
+.animate-slide-up-4 { animation: slideUp 0.7s ease 0.5s both; }
+.animate-float      { animation: floatY 4s ease-in-out infinite; }
+.animate-glow       { animation: glowPulse 3s ease-in-out infinite; }
+
+/* ── Shimmer gold text ── */
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-gold-dark) 0%,
+    var(--color-gold-light) 30%,
+    #fff8e7 50%,
+    var(--color-gold-light) 70%,
+    var(--color-gold-dark) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerText 4s linear infinite;
+}
+
+/* ── Luxury card ── */
+.card-luxury {
+  background: linear-gradient(135deg, rgba(24,22,15,0.95) 0%, rgba(18,16,9,0.98) 100%);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(20px);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-luxury::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top left, rgba(201,168,76,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.card-luxury:hover {
+  border-color: rgba(201,168,76,0.5);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.12);
+  transform: translateY(-6px);
+}
+
+/* ── Service grid ── */
+.grid-services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+/* ── Hero badge pill ── */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(201,168,76,0.3);
+  background: rgba(201,168,76,0.08);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold-light);
+  backdrop-filter: blur(10px);
+}
+
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  animation: glowPulse 2s infinite;
+}
+
+/* ── Stat pills ── */
+.stat-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 28px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
+}
+
+.stat-pill-value {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-pill-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ── Marquee scrolling band ── */
+.marquee-band {
+  overflow: hidden;
+  background: linear-gradient(90deg, var(--color-gold-dark), var(--color-saffron), var(--color-gold-dark));
+  padding: 14px 0;
+  position: relative;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 0;
+  white-space: nowrap;
+  animation: marqueeScroll 22s linear infinite;
+  will-change: transform;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+}
+
+.marquee-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(10,9,6,0.4);
+  flex-shrink: 0;
+}
+
+/* ── "Why choose us" step cards ── */
+.why-card {
+  padding: var(--space-xl);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(201,168,76,0.1);
+  background: linear-gradient(135deg, rgba(24,22,15,0.8) 0%, rgba(12,11,7,0.9) 100%);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.why-card:hover {
+  border-color: rgba(201,168,76,0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+}
+
+.why-card-number {
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, rgba(201,168,76,0.2) 0%, rgba(201,168,76,0.05) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  pointer-events: none;
+}
+
+.why-card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(232,114,42,0.1));
+  border: 1px solid rgba(201,168,76,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gold);
+  margin-bottom: var(--space-md);
+}
+
+/* ── CTA Banner ── */
+.cta-banner {
+  background: linear-gradient(135deg, #1a1508 0%, #0f0d06 40%, #1c1208 100%);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: var(--radius-xl);
+  padding: var(--space-3xl) var(--space-2xl);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 300px;
+  background: radial-gradient(ellipse, rgba(201,168,76,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Testimonial cards ── */
+.testimonial-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-star { color: var(--color-gold); font-size: 1rem; }
+
+/* ── Section full-screen ── */
+.section-full {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Tag pills ── */
+.tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(201,168,76,0.1);
+  color: var(--color-gold);
+  border: 1px solid rgba(201,168,76,0.2);
+}
+
+/* ── Luxury gradient btn ── */
+.btn-luxury {
+  background: linear-gradient(135deg, #C9A84C 0%, #E8C97A 40%, #E8722A 100%);
+  background-size: 200% auto;
+  color: #0A0906;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 24px rgba(201,168,76,0.35);
+  transition: all 0.4s ease;
+}
+
+.btn-luxury:hover {
+  background-position: right center;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 40px rgba(201,168,76,0.5);
+}
+
+/* ── Decorative gold divider ── */
+.divider-gold-full {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--color-gold) 30%, var(--color-saffron) 70%, transparent 100%);
+  opacity: 0.35;
+  margin: var(--space-xl) 0;
+}
+

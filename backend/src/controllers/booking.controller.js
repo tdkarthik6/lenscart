@@ -1,39 +1,36 @@
 const bookingService = require('../services/booking.service');
 const { success, created } = require('../utils/response');
 
-// Customer endpoints
+// Public - check slot availability
 const checkAvailability = async (req, res) => {
   const { date, startTime, endTime, serviceId } = req.query;
   const result = await bookingService.checkAvailability({
-    eventDate: date,
-    startTime,
-    endTime,
+    eventDate: date, startTime, endTime,
     serviceId: serviceId ? parseInt(serviceId) : null,
   });
   return success(res, result);
 };
 
+// Public - guest booking (no login required)
 const createBooking = async (req, res) => {
-  const { serviceId, eventDate, startTime, endTime, location, notes } = req.body;
-  const booking = await bookingService.createBooking({
-    customerId: req.user.id,
+  const {
+    serviceId, eventDate, startTime, endTime,
+    location, notes,
+    // Guest customer info
+    customerName, customerEmail, customerPhone,
+  } = req.body;
+
+  const booking = await bookingService.createGuestBooking({
     serviceId: parseInt(serviceId),
-    eventDate,
-    startTime,
-    endTime,
-    location,
-    notes,
+    eventDate, startTime, endTime, location, notes,
+    customerName, customerEmail, customerPhone,
   });
   return created(res, booking, 'Booking created successfully');
 };
 
-const getMyBookings = async (req, res) => {
-  const bookings = await bookingService.getMyBookings(req.user.id);
-  return success(res, bookings);
-};
-
-const getMyBookingById = async (req, res) => {
-  const booking = await bookingService.getMyBookingById(parseInt(req.params.id), req.user.id);
+// Public - look up a booking by reference number
+const getBookingByReference = async (req, res) => {
+  const booking = await bookingService.getBookingByReference(req.params.reference);
   return success(res, booking);
 };
 
@@ -70,6 +67,6 @@ const getCalendar = async (req, res) => {
 };
 
 module.exports = {
-  checkAvailability, createBooking, getMyBookings, getMyBookingById,
+  checkAvailability, createBooking, getBookingByReference,
   getAllBookings, getBookingById, updateBookingStatus, getDashboard, getCalendar,
 };

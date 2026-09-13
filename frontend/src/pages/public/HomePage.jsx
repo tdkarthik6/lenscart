@@ -53,12 +53,20 @@ const TESTIMONIALS = [
 ];
 
 export default function HomePage() {
-  const [featuredServices, setFeaturedServices] = useState([]);
+  const STATIC_FEATURED = [
+    { id: 1, name: 'Wedding Photography', description: 'Full-day coverage with 2 photographers, drone footage, and same-day highlights.', price: 75000, duration_minutes: 600, image_url: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80', included_features: '[]', active: 1 },
+    { id: 2, name: 'Pre-Wedding Shoot', description: 'Romantic outdoor or studio session capturing your love story with cinematic editing.', price: 25000, duration_minutes: 240, image_url: 'https://images.unsplash.com/photo-1529636798458-92182e662485?w=800&q=80', included_features: '[]', active: 1 },
+    { id: 3, name: 'Wedding Videography', description: '4K cinematic wedding film with professional colour grading and beautiful score.', price: 55000, duration_minutes: 600, image_url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80', included_features: '[]', active: 1 },
+  ];
+  const [featuredServices, setFeaturedServices] = useState(STATIC_FEATURED);
 
   useEffect(() => {
     servicesApi.getAll()
-      .then(res => setFeaturedServices((res.data.data || []).slice(0, 3)))
-      .catch(() => {});
+      .then(res => {
+        const data = res.data?.data;
+        if (Array.isArray(data) && data.length > 0) setFeaturedServices(data.slice(0, 3));
+      })
+      .catch(() => { /* keep fallback */ });
   }, []);
 
   return (

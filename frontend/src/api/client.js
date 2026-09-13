@@ -22,7 +22,7 @@ client.interceptors.response.use(
     if (err.response?.status === 401) {
       localStorage.removeItem('lenscraft_token');
       localStorage.removeItem('lenscraft_user');
-      window.location.href = '/login';
+      window.location.href = '/owner/login';
     }
     return Promise.reject(err);
   }

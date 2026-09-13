@@ -4,7 +4,7 @@ services:
     env: node
     region: singapore
     rootDir: backend
-    buildCommand: npm install
+    buildCommand: npm install && npm run setup
     startCommand: node src/server.js
     envVars:
       - key: NODE_ENV
@@ -17,13 +17,3 @@ services:
         value: Asia/Kolkata
       - key: JWT_SECRET
         generateValue: true
-      - key: DATABASE_HOST
-        sync: false
-      - key: DATABASE_PORT
-        value: "3306"
-      - key: DATABASE_USER
-        sync: false
-      - key: DATABASE_PASSWORD
-        sync: false
-      - key: DATABASE_NAME
-        value: lenscraft_db

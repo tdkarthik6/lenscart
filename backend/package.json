@@ -8,11 +8,13 @@
     "dev": "nodemon src/server.js",
     "migrate": "node migrations/run.js",
     "seed": "node seeds/seed.js",
+    "setup": "node migrations/run.js && node seeds/seed.js",
     "test": "jest --runInBand --forceExit",
     "test:coverage": "jest --runInBand --forceExit --coverage"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "better-sqlite3": "^9.4.3",
     "cors": "^2.8.5",
     "date-fns": "^3.6.0",
     "date-fns-tz": "^3.1.3",

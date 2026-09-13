@@ -4,6 +4,17 @@ import { servicesApi, bookingsApi } from '../../api/client';
 import toast from 'react-hot-toast';
 import { WhatsAppInlineButton } from '../../components/WhatsAppButton';
 
+// Static fallback — page works even with no backend
+const STATIC_SERVICES = {
+  1:{ id:1,name:'Wedding Photography',  price:75000,duration_minutes:600,image_url:'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80',description:'Full-day wedding coverage with 2 photographers, drone footage, and same-day highlights.',included_features:'["2 Photographers","600+ Edited Photos","Drone Coverage","Same-day Highlights","USB Drive"]'},
+  2:{ id:2,name:'Pre-Wedding Shoot',    price:25000,duration_minutes:240,image_url:'https://images.unsplash.com/photo-1529636798458-92182e662485?w=800&q=80',description:'Romantic outdoor session capturing your love story with cinematic editing.',included_features:'["4 Hours Session","150+ Edited Photos","Styling Guidance","Online Gallery"]'},
+  3:{ id:3,name:'Wedding Videography', price:55000,duration_minutes:600,image_url:'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80',description:'4K cinematic wedding film with colour grading and beautiful background score.',included_features:'["4K Cinematic Film","Highlight Reel","Drone Aerial","USB Delivery"]'},
+  4:{ id:4,name:'Birthday Photography',price:12000,duration_minutes:180,image_url:'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=80',description:'Joyful birthday coverage — candid moments, cake cutting, and group shots.',included_features:'["3 Hours","100+ Photos","1 Photographer","Online Gallery"]'},
+  5:{ id:5,name:'Corporate Events',    price:20000,duration_minutes:480,image_url:'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',description:'Professional event coverage for conferences and product launches.',included_features:'["Full Day","500+ Photos","48hr Delivery","Commercial License"]'},
+  6:{ id:6,name:'Event Videography',   price:18000,duration_minutes:360,image_url:'https://images.unsplash.com/photo-1574717025058-2f8737d2e2b7?w=800&q=80',description:'Complete video coverage for corporate, cultural, or social events.',included_features:'["6 Hours","4K Recording","Highlight Reel","Online Delivery"]'},
+};
+
+
 function formatPrice(p) {
   return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(p);
 }
@@ -41,12 +52,15 @@ export default function BookingPage() {
   const [availability, setAvailability] = useState(null);
   const [availLoading, setAvailLoading] = useState(false);
   const [submitting, setSubmitting]     = useState(false);
-  const [success, setSuccess]           = useState(null); // booking object on success
+  const [success, setSuccess]           = useState(null);
 
+  // Load service: use static fallback instantly, try API in background
   useEffect(() => {
+    const fallback = STATIC_SERVICES[parseInt(serviceId)];
+    if (fallback) { setService(fallback); setSvcLoading(false); }
     servicesApi.getById(serviceId)
-      .then(res => setService(res.data.data))
-      .catch(() => setSvcError('Service not found.'))
+      .then(res => { if (res.data?.data) setService(res.data.data); })
+      .catch(() => { if (!fallback) setSvcError('Service not found.'); })
       .finally(() => setSvcLoading(false));
   }, [serviceId]);
 
